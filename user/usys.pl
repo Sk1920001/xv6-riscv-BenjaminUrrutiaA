@@ -44,3 +44,6 @@ entry("pause");
 entry("uptime");
 entry("getppid");
 entry ("getancestror");
+entry ("settickets");
+entry ("getslices");
+

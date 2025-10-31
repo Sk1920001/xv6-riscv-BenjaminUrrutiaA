@@ -144,6 +144,7 @@ UPROGS=\
 	$U/_dorphan\
 	$U/_soytupadre\
 	$U/_test_ancestror\
+	$U/_demo\
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)

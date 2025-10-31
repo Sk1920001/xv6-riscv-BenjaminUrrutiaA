@@ -22,3 +22,5 @@
 #define SYS_close        21
 #define SYS_getppid      22
 #define SYS_getancestror 23
+#define SYS_settickets   24
+#define SYS_getslices    25

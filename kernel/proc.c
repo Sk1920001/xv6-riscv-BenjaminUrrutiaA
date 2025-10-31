@@ -6,6 +6,7 @@
 #include "proc.h"
 #include "defs.h"
 
+
 struct cpu cpus[NCPU];
 
 struct proc proc[NPROC];
@@ -436,14 +437,17 @@ int sum_tickets(void)
 }
 
 static
-unsigned long rand_val(int a) {
-  unsigned long b = 276477591373, c= 475477371373;
-  return (a * b) % c;
+unsigned long rand_val(unsigned int *seed) {  //LGC Number Generator
+  unsigned long a = 1103515245, c = 12345;    //Magic numbers used in glibc
+  *seed = (a* (*seed) + c);                   // Create a big number that overflows the 32 bits of unsigned int (take it's mod 2^32)
+  return *seed;
 }
 
 void
 scheduler(void)
 {
+
+  unsigned int seed = r_time();          //Seed for random number generator implemented in lottery scheduler
   struct proc *p;
   struct cpu *c = mycpu();
 
@@ -466,7 +470,7 @@ scheduler(void)
     if(tickets_sum <= 0){
       continue;
     }
-    winner_ticket = rand_val(count) % tickets_sum;
+    winner_ticket = rand_val(&seed) % tickets_sum;
 
     int acc = 0;
     for(p = proc; p < &proc[NPROC]; p++) {

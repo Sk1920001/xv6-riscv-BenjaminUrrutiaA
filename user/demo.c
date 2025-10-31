@@ -9,7 +9,7 @@ int main() {
       printf("Fork failed\n");
       exit(1);
     }else if (pid == 0) {
-      settickets(50 - (i+1)); // Child process
+      settickets(50 - (i+1));
       int slices;
       int prev_slices = 0;
       while(1){
